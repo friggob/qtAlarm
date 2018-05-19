@@ -2,6 +2,7 @@
 #define QTALARM_H
 
 #include <QMainWindow>
+#include <QSettings>
 
 namespace Ui {
 class qtAlarm;
@@ -15,8 +16,18 @@ public:
     explicit qtAlarm(QWidget *parent = 0);
     ~qtAlarm();
 
-private:
+	private slots:
+		void on_actionQuit_triggered();
+		void on_actionSaveConfig_triggered();
+		void showTime();
+
+	private:
     Ui::qtAlarm *ui;
+		void createMenu();
+		void readConfig();
+		void saveConfig();
+		QSettings *cSet;
+		QPoint oldPos;
 };
 
 #endif // QTALARM_H
