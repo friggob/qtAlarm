@@ -11,6 +11,7 @@ qtAlarm::qtAlarm(QWidget *parent) :
 	QPalette p;
 	QTimer *timer = new QTimer(this);
 	cSet = new QSettings("JFO Soft","qtAlarm");
+	toggle = true;
 
 	connect(timer,SIGNAL(timeout()),this,SLOT(showTime()));
 	timer->start(1 * 1000);
@@ -82,8 +83,15 @@ void qtAlarm::saveConfig() {
 
 void qtAlarm::showTime() {
 	QDateTime dt(QDateTime::currentDateTime());
+	QString format;
 
-	ui->label->setText(dt.toString("HH:mm"));
+	if(toggle)
+		format = "HH:mm";
+	else
+		format = "HH mm";
+
+	toggle = !toggle;
+	ui->label->setText(dt.toString(format));
 }
 
 void qtAlarm::on_actionSaveConfig_triggered() {

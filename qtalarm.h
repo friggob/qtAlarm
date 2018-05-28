@@ -28,6 +28,7 @@ public:
 		void saveConfig();
 		QSettings *cSet;
 		QPoint oldPos;
+		bool toggle;
 };
 
 #endif // QTALARM_H
